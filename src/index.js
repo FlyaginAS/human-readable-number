@@ -1,7 +1,7 @@
 module.exports = function toReadable(number) {
   const hundreds = {
     1: 'one hundred',
-    2: 'two hunderd',
+    2: 'two hundred',
     3: 'three hundred',
     4: 'four hundred',
     5: 'five hundred',
@@ -14,12 +14,12 @@ module.exports = function toReadable(number) {
     1: '',
     2: 'twenty',
     3: 'thirty',
-    4: 'fourty',
+    4: 'forty',
     5: 'fifty',
     6: 'sixty',
     7: 'seventy',
     8: 'eighty',
-    9: 'ninty',
+    9: 'ninety',
   };
   const tensIrr = {
     10: 'ten',
@@ -76,6 +76,9 @@ module.exports = function toReadable(number) {
   }
   if (length === 3) {
     [hundredsNumber] = strNum;
+    if (toReadableTens(strNum.slice(1)) === '') {
+      return hundreds[hundredsNumber].trim();
+    }
     return `${hundreds[hundredsNumber]} ${toReadableTens(strNum.slice(1))}`;
   }
   if (length === 2) {
