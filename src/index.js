@@ -58,24 +58,51 @@ function toReadable(number) {
       `${hundreds[hundredsNumber]} ${tens[tensNumber]} ${units[unitsNumber]}`
     );
   } else if (length === 2) {
+    // if (number.toString()[0] === "1") {
+    //   console.log(tensIrr[number]);
+    // } else {
+    //   unitsNumber = number.toString()[1];
+    //   tensNumber = number.toString()[0];
+    //   if (unitsNumber === "0") {
+    //     console.log(tens[tensNumber]);
+    //   } else {
+    //     console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
+    //   }
+    // }
+    //!
+    return toReadableTens(number);
+  } else {
+    // unitsNumber = number.toString()[0];
+
+    // console.log(units[unitsNumber]);
+    //!
+    console.log(toReadableUnits(number));
+    return toReadableUnits(number);
+  }
+  //*definitions************************************* */
+  function toReadableUnits(number) {
+    unitsNumber = number.toString()[0];
+    return units[unitsNumber];
+  }
+
+  function toReadableTens(number) {
     if (number.toString()[0] === '1') {
       console.log(tensIrr[number]);
+      return tensIrr[number];
     } else {
       unitsNumber = number.toString()[1];
       tensNumber = number.toString()[0];
       if (unitsNumber === '0') {
         console.log(tens[tensNumber]);
+        return tens[tensNumber];
       } else {
         console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
+        return `${tens[tensNumber]} ${units[unitsNumber]}`;
       }
     }
-  } else {
-    unitsNumber = number.toString()[0];
-
-    console.log(units[unitsNumber]);
   }
 }
 
-toReadable(1);
+toReadable(9);
 toReadable(20);
 toReadable(900);
