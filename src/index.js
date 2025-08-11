@@ -21,6 +21,18 @@ function toReadable(number) {
     8: 'eighty',
     9: 'ninty',
   };
+  const tensIrr = {
+    10: 'ten',
+    11: 'eleven',
+    12: 'twelve',
+    13: 'thirteen',
+    14: 'fourteen',
+    15: 'fifteen',
+    16: 'sixteen',
+    17: 'seventeen',
+    18: 'eighteen',
+    19: 'nineteen',
+  };
   const units = {
     0: 'zero',
     1: 'one',
@@ -46,10 +58,17 @@ function toReadable(number) {
       `${hundreds[hundredsNumber]} ${tens[tensNumber]} ${units[unitsNumber]}`
     );
   } else if (length === 2) {
-    unitsNumber = number.toString()[1];
-    tensNumber = number.toString()[0];
-
-    console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
+    if (number.toString()[0] === '1') {
+      console.log(tensIrr[number]);
+    } else {
+      unitsNumber = number.toString()[1];
+      tensNumber = number.toString()[0];
+      if (unitsNumber === '0') {
+        console.log(tens[tensNumber]);
+      } else {
+        console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
+      }
+    }
   } else {
     unitsNumber = number.toString()[0];
 
@@ -58,5 +77,5 @@ function toReadable(number) {
 }
 
 toReadable(1);
-toReadable(99);
-toReadable(999);
+toReadable(20);
+toReadable(900);
