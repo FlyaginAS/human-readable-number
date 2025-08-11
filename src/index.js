@@ -1,4 +1,4 @@
-function toReadable(number) {
+module.exports = function toReadable(number) {
   const hundreds = {
     1: 'one hundred',
     2: 'two hunderd',
@@ -51,42 +51,35 @@ function toReadable(number) {
   let tensNumber;
   let hundredsNumber;
 
-  if (length === 3) {
-    hundredsNumber = strNum[0];
-    console.log(
-      `${hundreds[hundredsNumber]} ${toReadableTens(strNum.slice(1))}`
-    );
-  } else if (length === 2) {
-    console.log(toReadableTens(strNum));
-    return toReadableTens(strNum);
-  } else {
-    console.log(toReadableUnits(strNum));
-    return toReadableUnits(strNum);
-  }
-  //*definitions************************************* */
-  function toReadableUnits(strNum) {
-    unitsNumber = strNum[0];
+  function toReadableUnits(strNumm) {
+    [unitsNumber] = strNumm;
     return units[unitsNumber];
   }
 
-  function toReadableTens(strNum) {
-    if (strNum[0] === '1') {
-      console.log(tensIrr[strNum]);
-      return tensIrr[strNum];
-    } else {
-      unitsNumber = strNum[1];
-      tensNumber = strNum[0];
-      if (unitsNumber === '0') {
-        console.log(tens[tensNumber]);
-        return tens[tensNumber];
-      } else {
-        console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
-        return `${tens[tensNumber]} ${units[unitsNumber]}`;
-      }
+  function toReadableTens(strNumm) {
+    if (strNumm === '00') {
+      return '';
     }
-  }
-}
+    if (strNumm[0] === '0') {
+      return units[strNumm[1]];
+    }
+    if (strNumm[0] === '1') {
+      return tensIrr[strNumm];
+    }
+    [, unitsNumber] = strNumm;
+    [tensNumber] = strNumm;
+    if (unitsNumber === '0') {
+      return tens[tensNumber];
+    }
 
-toReadable(9);
-toReadable(20);
-toReadable(115);
+    return `${tens[tensNumber]} ${units[unitsNumber]}`;
+  }
+  if (length === 3) {
+    [hundredsNumber] = strNum;
+    return `${hundreds[hundredsNumber]} ${toReadableTens(strNum.slice(1))}`;
+  }
+  if (length === 2) {
+    return toReadableTens(strNum);
+  }
+  return toReadableUnits(strNum);
+};
