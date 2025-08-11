@@ -45,53 +45,37 @@ function toReadable(number) {
     8: 'eight',
     9: 'nine',
   };
-  const { length } = number.toString();
+  const strNum = number.toString();
+  const { length } = strNum;
   let unitsNumber;
   let tensNumber;
   let hundredsNumber;
 
   if (length === 3) {
-    unitsNumber = number.toString()[2];
-    tensNumber = number.toString()[1];
-    hundredsNumber = number.toString()[0];
+    hundredsNumber = strNum[0];
     console.log(
-      `${hundreds[hundredsNumber]} ${tens[tensNumber]} ${units[unitsNumber]}`
+      `${hundreds[hundredsNumber]} ${toReadableTens(strNum.slice(1))}`
     );
   } else if (length === 2) {
-    // if (number.toString()[0] === "1") {
-    //   console.log(tensIrr[number]);
-    // } else {
-    //   unitsNumber = number.toString()[1];
-    //   tensNumber = number.toString()[0];
-    //   if (unitsNumber === "0") {
-    //     console.log(tens[tensNumber]);
-    //   } else {
-    //     console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
-    //   }
-    // }
-    //!
-    return toReadableTens(number);
+    console.log(toReadableTens(strNum));
+    return toReadableTens(strNum);
   } else {
-    // unitsNumber = number.toString()[0];
-
-    // console.log(units[unitsNumber]);
-    //!
-    console.log(toReadableUnits(number));
-    return toReadableUnits(number);
+    console.log(toReadableUnits(strNum));
+    return toReadableUnits(strNum);
   }
   //*definitions************************************* */
-  function toReadableUnits(number) {
-    unitsNumber = number.toString()[0];
+  function toReadableUnits(strNum) {
+    unitsNumber = strNum[0];
     return units[unitsNumber];
   }
 
-  function toReadableTens(number) {
-    if (number.toString()[0] === '1') {
-      console.log(tensIrr[number]);
-      return tensIrr[number];
+  function toReadableTens(strNum) {
+    if (strNum[0] === '1') {
+      console.log(tensIrr[strNum]);
+      return tensIrr[strNum];
     } else {
-      unitsNumber = number.toString()[1];
-      tensNumber = number.toString()[0];
+      unitsNumber = strNum[1];
+      tensNumber = strNum[0];
       if (unitsNumber === '0') {
         console.log(tens[tensNumber]);
         return tens[tensNumber];
@@ -105,4 +89,4 @@ function toReadable(number) {
 
 toReadable(9);
 toReadable(20);
-toReadable(900);
+toReadable(115);
