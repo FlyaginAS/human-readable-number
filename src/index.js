@@ -1,17 +1,3 @@
-// module.exports = function toReadable(number) {
-//   // throw new Error('Not implemented');
-//   const { length } = number.toString();
-
-//   if (length === 3) {
-//     console.log('3');
-//   } else if (length === 2) {
-//     console.log('2');
-//   } else {
-//     console.log('1');
-//   }
-// };
-
-//!
 function toReadable(number) {
   const hundreds = {
     1: 'one hundred',
@@ -48,20 +34,29 @@ function toReadable(number) {
     9: 'nine',
   };
   const { length } = number.toString();
-
-  const tensNumber = number.toString()[2];
-  const unitsNumber = number.toString()[1];
-  const hundredsNumber = number.toString()[0];
+  let unitsNumber;
+  let tensNumber;
+  let hundredsNumber;
 
   if (length === 3) {
-    console.log('3');
+    unitsNumber = number.toString()[2];
+    tensNumber = number.toString()[1];
+    hundredsNumber = number.toString()[0];
+    console.log(
+      `${hundreds[hundredsNumber]} ${tens[tensNumber]} ${units[unitsNumber]}`
+    );
   } else if (length === 2) {
-    console.log(`${number}`);
+    unitsNumber = number.toString()[1];
+    tensNumber = number.toString()[0];
+
+    console.log(`${tens[tensNumber]} ${units[unitsNumber]}`);
   } else {
-    console.log(units[number]);
+    unitsNumber = number.toString()[0];
+
+    console.log(units[unitsNumber]);
   }
 }
 
 toReadable(1);
-toReadable(25);
-toReadable(589);
+toReadable(99);
+toReadable(999);
